@@ -14,6 +14,7 @@ module.exports = {
           assets: './src/assets',
           navigations: './src/navigations',
           services: './src/services',
+          store: './src/store',
           styles: './src/styles',
           utils: './src/utils',
         },
