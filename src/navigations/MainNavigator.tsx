@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/stack';
 import {RootStackParamList} from 'src/types/NavigatorTypes';
 import HomeScreen from 'screens/HomeScreen/HomeScreen';
+import TabNavigator from './TabNavigator';
 
 const Main = createStackNavigator<RootStackParamList>();
 
@@ -24,8 +25,8 @@ const MainNavigator = () => {
   return (
     <Main.Navigator screenOptions={options}>
       <Main.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="TabNavigator"
+        component={TabNavigator}
         options={{headerShown: false}}
       />
     </Main.Navigator>
