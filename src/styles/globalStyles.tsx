@@ -4,11 +4,11 @@ const globalStyles = (backgroundColor?: string) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: backgroundColor || '#eaeaea',
+      backgroundColor: backgroundColor || '#ffffff',
     },
     bottomSafeArea: {
       flex: 1,
-      backgroundColor: backgroundColor || '#eaeaea',
+      backgroundColor: backgroundColor || '#ffffff',
     },
     safe: {
       flex: 1,
