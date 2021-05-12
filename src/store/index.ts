@@ -24,7 +24,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default function () {
   const store = createStore(persistedReducer);
-  console.log(store.getState());
+  //console.log(store.getState());
   //@ts-ignore
   const persistor = persistStore(store);
   return {store, persistor};

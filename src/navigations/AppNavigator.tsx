@@ -2,7 +2,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createStackNavigator,
-  CardStyleInterpolators,
   StackNavigationOptions,
 } from '@react-navigation/stack';
 import SplashScreen from 'screens/SplashScreen/SplashScreen';
@@ -25,7 +24,7 @@ const options: StackNavigationOptions = {
 
 const AppNavigator = () => {
   const linking = {
-    prefixes: ['meetstest://'],
+    prefixes: ['meets://'],
   };
 
   return (

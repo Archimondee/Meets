@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import styles from './CardGridStyles';
 
 interface CardGridProps {
@@ -7,28 +7,27 @@ interface CardGridProps {
   title: string;
   name: string;
   price: string;
+  gotoDetail: (item: any) => void;
 }
 
 const CardGrid = (props: CardGridProps) => {
+  const {img, title, name, price, gotoDetail} = props;
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('assets/images/metalica.jpg')}
-        style={styles.image}
-        resizeMode={'cover'}
-      />
+    <TouchableOpacity onPress={gotoDetail} style={styles.container}>
+      <Image source={img} style={styles.image} resizeMode={'cover'} />
       <View style={{paddingVertical: 20}}>
         <Text numberOfLines={3} style={styles.title}>
-          Metallica Concert in Palace Grounds (Paid)
+          {title}
         </Text>
         <Text numberOfLines={2} style={styles.name}>
-          by Metallica
+          by {name}
         </Text>
         <Text numberOfLines={2} style={styles.price}>
-          Price {`\n`}Rp 1.500.000
+          Price {`\n`}
+          {price !== '' ? price : 'Free'}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

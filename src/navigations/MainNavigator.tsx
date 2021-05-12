@@ -5,8 +5,8 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack';
 import {RootStackParamList} from 'src/types/NavigatorTypes';
-import HomeScreen from 'screens/HomeScreen/HomeScreen';
 import TabNavigator from './TabNavigator';
+import DetailScreen from 'screens/DetailScreen/DetailScreen';
 
 const Main = createStackNavigator<RootStackParamList>();
 
@@ -27,6 +27,11 @@ const MainNavigator = () => {
       <Main.Screen
         name="TabNavigator"
         component={TabNavigator}
+        options={{headerShown: false}}
+      />
+      <Main.Screen
+        component={DetailScreen}
+        name="DetailScreen"
         options={{headerShown: false}}
       />
     </Main.Navigator>
