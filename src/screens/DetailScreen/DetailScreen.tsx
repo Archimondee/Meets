@@ -5,14 +5,47 @@ import globalStyles from 'styles/globalStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Headers from 'components/atoms/headers/Headers';
 import styles from './DetailScreenStyles';
+import {RouteProp, useFocusEffect} from '@react-navigation/core';
+import {RootStackParamList} from 'src/types/NavigatorTypes';
+import {useDispatch, useSelector} from 'react-redux';
+import {StoreStateType} from 'src/store';
+import {DataDetailTypes} from 'src/types/DataTypes';
+import {addData} from 'store/user/actions';
 
-interface DetailScreenProps {}
+type DetailsScreenRouteType = RouteProp<RootStackParamList, 'DetailScreen'>;
 
-const DetailScreen = (props: DetailScreenProps) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+type Prop = {
+  route: DetailsScreenRouteType;
+};
+
+const DetailScreen = ({route}: Prop) => {
+  const {item} = route.params;
+  const {data} = useSelector((state: StoreStateType) => state.user);
+  const [isFavorite, setIsFavorite] = useState(item.isFavorite);
+  const dispatch = useDispatch();
   const addFavorite = () => {
     setIsFavorite(!isFavorite);
+    const newArray: any = [];
+    data.map((data: DataDetailTypes, index) => {
+      if (data.title === item.title) {
+        const dataFavoriteChange = {
+          img: data.img,
+          title: data.title,
+          paid: data.paid,
+          description: data.description,
+          price: data.price,
+          nama: data.name,
+          isFavorite: !isFavorite,
+        };
+        //console.log('change : ', dataFavoriteChange);
+        newArray.push(dataFavoriteChange);
+      } else {
+        newArray.push(data);
+      }
+    });
+    dispatch(addData(newArray));
   };
+
   return (
     <SafeAreaView
       style={[
@@ -21,23 +54,17 @@ const DetailScreen = (props: DetailScreenProps) => {
       ]}>
       <Headers isFavorite={isFavorite} addFavorite={addFavorite} />
       <View style={styles.content}>
-        <Image
-          source={require('assets/images/metalica.jpg')}
-          style={styles.image}
-        />
+        <Image source={item.img} style={styles.image} />
         <Text numberOfLines={2} style={styles.title}>
-          Judul Berita
+          {item.title}
         </Text>
-        <Text style={styles.name}>Metallica</Text>
-        <Text style={styles.price}>Price : Rp. 1.500.000</Text>
+        <Text style={styles.name}>By {item.name}</Text>
+        <Text style={styles.price}>
+          Price : {item.price !== '' ? item.price : 'Free'}
+        </Text>
       </View>
       <View>
-        <Text style={styles.description}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta neque
-          amet perferendis in repudiandae velit eius ullam earum repellat
-          eligendi vel ipsam minus possimus, dignissimos adipisci nisi, porro ut
-          impedit.
-        </Text>
+        <Text style={styles.description}>{item.description}</Text>
       </View>
     </SafeAreaView>
   );

@@ -17,6 +17,7 @@ import {StoreStateType} from 'src/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {addData} from 'store/user/actions';
 import NavigationService from 'utils/NavigationService';
+import {DataDetailTypes} from 'src/types/DataTypes';
 
 interface HomeScreenProps {}
 
@@ -30,8 +31,8 @@ const HomeScreen = (props: HomeScreenProps) => {
     setIsVertical(value);
   };
 
-  const gotoDetail = (item: any) => {
-    NavigationService.navigate('DetailScreen');
+  const gotoDetail = (item: DataDetailTypes) => {
+    NavigationService.navigate('DetailScreen', {item: item});
   };
 
   return (
