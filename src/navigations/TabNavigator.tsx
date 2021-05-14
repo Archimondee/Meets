@@ -4,6 +4,7 @@ import HomeScreen from 'screens/HomeScreen/HomeScreen';
 import HomeTab from './Tabs/HomeTab';
 import {TitleFavorite, TitleHome} from 'components/atoms/navigations/TabsTitle';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FavoriteTab from './Tabs/FavoriteTab';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +42,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Favorite"
-        component={HomeTab}
+        component={FavoriteTab}
         options={{
           tabBarLabel: ({focused}) => <TitleHome focused={focused} />,
         }}

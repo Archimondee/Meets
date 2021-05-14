@@ -1,4 +1,4 @@
-import {ADD_GOAL, ADD_DATA, ADD_FAVORITES} from './types';
+import {ADD_GOAL, ADD_DATA, ADD_FAVORITES, SET_PREFERENCES} from './types';
 
 export function addGoal(data: number) {
   return {
@@ -17,6 +17,13 @@ export function addData(data: any[]) {
 export function addFavorites(data: any[]) {
   return {
     type: ADD_FAVORITES,
+    payload: data,
+  };
+}
+
+export function setPreferences(data: string) {
+  return {
+    type: SET_PREFERENCES,
     payload: data,
   };
 }

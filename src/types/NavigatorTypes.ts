@@ -5,7 +5,13 @@ export type RootStackParamList = {
   Main: undefined;
   HomeScreen: undefined;
   TabNavigator: undefined;
+  FavoriteScreen: undefined;
   DetailScreen: {item: DataDetailTypes};
 };
 
-export type RootType = 'SplashScreen' | 'HomeScreen' | 'Main' | 'DetailScreen';
+export type RootType =
+  | 'SplashScreen'
+  | 'HomeScreen'
+  | 'Main'
+  | 'DetailScreen'
+  | 'FavoriteScreen';

@@ -4,6 +4,7 @@ const initialState: UserState = {
   goal: 0,
   data: [],
   favorites: [],
+  preferences: 'list',
 };
 
 export function userReducer(state = initialState, action: UserActionTypes) {
@@ -24,6 +25,12 @@ export function userReducer(state = initialState, action: UserActionTypes) {
       return {
         ...state,
         favorites: action.payload,
+      };
+
+    case 'SET_PREFERENCES':
+      return {
+        ...state,
+        preferences: action.payload,
       };
 
     default:

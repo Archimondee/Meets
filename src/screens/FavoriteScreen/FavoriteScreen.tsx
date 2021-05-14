@@ -1,29 +1,20 @@
 import Card from 'components/organisms/Card/Card';
 import CardGrid from 'components/organisms/CardGrid/CardGrid';
-import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import globalStyles from 'styles/globalStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {StoreStateType} from 'src/store';
 import {useDispatch, useSelector} from 'react-redux';
-import {addData, setPreferences} from 'store/user/actions';
+import {setPreferences} from 'store/user/actions';
 import NavigationService from 'utils/NavigationService';
 import {DataDetailTypes} from 'src/types/DataTypes';
-import styles from './HomeScreenStyles';
+import styles from './FavoriteScreenStyles';
 
-interface HomeScreenProps {}
+interface FavoriteScreenProps {}
 
-const HomeScreen = (props: HomeScreenProps) => {
-  //console.log('data : ', data);
+const FavoriteScreen = (props: FavoriteScreenProps) => {
   const {data, preferences} = useSelector(
     (state: StoreStateType) => state.user,
   );
@@ -47,7 +38,7 @@ const HomeScreen = (props: HomeScreenProps) => {
       <View>
         <Text style={styles.titleText}>Events</Text>
         <View style={styles.containerItem}>
-          <Text style={styles.subtitleText}>Browse the hottest events</Text>
+          <Text style={styles.subtitleText}>Browse your favorite events</Text>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity onPress={() => changeGrid(false)}>
               <Icon
@@ -79,7 +70,7 @@ const HomeScreen = (props: HomeScreenProps) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.contentContainer}
             renderItem={({item, index}) => {
-              return (
+              return item.isFavorite ? (
                 <TouchableOpacity onPress={() => gotoDetail(item)}>
                   <Card
                     key={item.title}
@@ -89,6 +80,8 @@ const HomeScreen = (props: HomeScreenProps) => {
                     img={item.img}
                   />
                 </TouchableOpacity>
+              ) : (
+                <View />
               );
             }}
             keyExtractor={(item, index) => `${item.title} ${index}`}
@@ -100,7 +93,7 @@ const HomeScreen = (props: HomeScreenProps) => {
         <ScrollView showsVerticalScrollIndicator={false} style={{}}>
           <View style={styles.containerGrid}>
             {data.map((item, index) => {
-              return !isVertical ? (
+              return !isVertical && item.isFavorite ? (
                 <CardGrid
                   gotoDetail={() => gotoDetail(item)}
                   key={item.title}
@@ -109,9 +102,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                   name={item.name}
                   img={item.img}
                 />
-              ) : (
-                <View key={index} />
-              );
+              ) : null;
             })}
           </View>
         </ScrollView>
@@ -120,4 +111,4 @@ const HomeScreen = (props: HomeScreenProps) => {
   );
 };
 
-export default HomeScreen;
+export default FavoriteScreen;
