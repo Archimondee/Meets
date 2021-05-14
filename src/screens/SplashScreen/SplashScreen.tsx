@@ -39,8 +39,13 @@ const SplashScreen = (props: SplashScreenProps) => {
   };
   return (
     <SafeAreaView style={[globalStyles().container, styles.container]}>
-      <Text>SplashScreen</Text>
-      <Text>{isDataExist ? 'Initializing Data' : ''}</Text>
+      <Image
+        source={require('assets/images/logo.jpg')}
+        style={{width: '100%', height: '30%', resizeMode: 'cover'}}
+      />
+      <Text style={{paddingVertical: 30, fontSize: 16, fontWeight: 'bold'}}>
+        {isDataExist ? 'Initializing Data' : ''}
+      </Text>
     </SafeAreaView>
   );
 };
